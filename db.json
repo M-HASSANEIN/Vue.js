@@ -1,0 +1,34 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "text": "tiko appointments",
+      "day": "march 1st at 2:30 pm",
+      "reminder": true
+    },
+    {
+      "id": "2",
+      "text": "Meeting at home",
+      "day": "march 2st at 5:30 pm",
+      "reminder": false
+    },
+    {
+      "id": "3",
+      "text": "Food Shopping",
+      "day": "march 5st at 10:30 pm",
+      "reminder": true
+    },
+    {
+      "id": "4",
+      "text": "Go to play football",
+      "day": "march 1st at 2:30 pm",
+      "reminder": true
+    },
+    {
+      "id": "5",
+      "text": "Listen to Music",
+      "day": "march 1st at 2:30 pm",
+      "reminder": true
+    }
+  ]
+}

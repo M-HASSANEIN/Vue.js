@@ -1,82 +1,31 @@
 <template>
   <div class="container">
-    <Title @show-addtask="showTask" title="Task Tracker"  :showfrom="showfrom"/>
-    <div v-if="showfrom">
-      <AddTask @add-task="AddTask" />
-    </div>
+    <Title @show-addtask="showTask" title="Task Tracker" :showfrom="showfrom" />
 
-    <Tasks @doubleClick="Deletetask" @delete-task="deletetask" :tasks="tasks" />
+    <router-view  :showfrom="showfrom"></router-view>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Title from "./components/Title.vue";
-import Tasks from "./components/Tasks.vue";
-import AddTask from "./components/AddTask.vue";
+import Footer from "./components/Footer.vue";
+
 export default {
   name: "App",
   components: {
     Title,
-    Tasks,
-    AddTask,
+    Footer,
   },
   data() {
     return {
-      tasks: [],
-      showfrom: false,
-    };
+      /* showfrom: false, */
+    }
   },
   methods: {
-    AddTask(task) {
-      this.tasks = [...this.tasks, task];
-    },
-    deletetask(id) {
-      if (confirm("Are you sure you want to delete this task ")) {
-        this.tasks = this.tasks.filter((task) => task.id !== id);
-      }
-    },
-    Deletetask(id) {
-      this.tasks = this.tasks.map((task) =>
-        task.id === id ? { ...task, reminder: !task.reminder } : task
-      );
-    },
     showTask() {
       this.showfrom = !this.showfrom;
     },
-  },
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: "doctors appointments",
-        day: "march 1st at 2:30 pm",
-        reminder: true,
-      },
-      {
-        id: 2,
-        text: "Meeting at School",
-        day: "march 2st at 5:30 pm",
-        reminder: true,
-      },
-      {
-        id: 3,
-        text: "Food Shopping",
-        day: "march 5st at 10:30 pm",
-        reminder: false,
-      },
-      {
-        id: 4,
-        text: "Go to play football",
-        day: "march 1st at 2:30 pm",
-        reminder: true,
-      },
-      {
-        id: 5,
-        text: "Listen to Music",
-        day: "march 1st at 2:30 pm",
-        reminder: false,
-      },
-    ];
   },
 };
 </script>

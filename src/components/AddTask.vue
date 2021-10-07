@@ -34,13 +34,11 @@ export default {
   methods: {
     Submit(e) {
       e.preventDefault();
-      if (!this.text) {
-        alert("please fill text input ");
+      if (!this.text ||!this.day) {
+        alert("please fill all input ");
       }
-      if (!this.day) {
-        alert("please fill day input ");
-      }
-      const newTask = {
+     else{
+        const newTask = {
         id: Math.floor(Math.random() * 10000),
         text:this.text,
         day:this.day,
@@ -51,6 +49,8 @@ export default {
       this.text=""
       this.day=""
       this.reminder=false
+      }
+      
      
     },
   },

@@ -1,0 +1,19 @@
+ methods: {
+
+ fetchAllData: function () {
+        axios
+        .get("http://localhost:3000/index.php" + '?action=fetch-all')
+          .then((response) => {
+                this.tasks = response.data;
+                console.log('response', this.tasks);
+          });
+      },
+
+
+
+  },
+  created() {
+    this.tasks=this.fetchAllData();
+  },
+};
+</script>

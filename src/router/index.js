@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from "../views/Home.vue";
+//in CASE OF DATA BASE API
+/* import HomeApi from "../views/HomeApi.vue"; */
 import About from "../views/About.vue";
 
 const routes = [
@@ -13,6 +15,13 @@ const routes = [
         name: "About",
         component: About,
     },
+    //INCASE OF DATABASE API
+    /*  {
+         path: '/',
+         name: "HomeApi",
+         component: HomeApi,
+     }, */
+
 
 ]
 const router = createRouter({

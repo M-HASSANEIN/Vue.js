@@ -1,5 +1,4 @@
 <template>
- 
   <AddTask v-show="showfrom" @add-task="AddTask" />
   <Tasks
     @doubleClick="toggleRiminder"
@@ -10,6 +9,7 @@
 <script>
 import Tasks from "../components/Tasks.vue";
 import AddTask from "../components/AddTask.vue";
+import axios from "axios";
 export default {
   name: "Home",
   props: {
@@ -25,60 +25,36 @@ export default {
     };
   },
   methods: {
-    async AddTask(task) {
-      const res = await fetch("api/tasks", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(task),
-      });
-      const data = await res.json();
-      this.tasks = [...this.tasks, data];
-    },
-    async deletetask(id) {
-      if (confirm("Are you sure you want to delete this task ")) {
-        const res = await fetch(`api/tasks/${id}`, {
-          method: "DELETE",
+    fetchAllData: function () {
+      axios
+        .get("http://localhost:3000/index.php" + "?action=fetch-all")
+        .then((response) => {
+          this.tasks = response.data;
+          /*  console.log('response', this.tasks); */
         });
-        if (res.status === 200) {
-          this.tasks = this.tasks.filter((task) => task.id !== id);
-        } else {
-          alert("erro while deleting");
-        }
-      }
-    },
-    async toggleRiminder(id) {
-      const taskToggle = await this.fetchTask(id);
-      const UpdTask = { ...taskToggle, reminder: !taskToggle.reminder };
-      const res = await fetch(`api/tasks/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(UpdTask),
-      });
-      const data = await res.json();
-      this.tasks = this.tasks.map((task) =>
-        task.id === id ? { ...task, reminder: data.reminder } : task
-      );
     },
 
-    async fetchTasks() {
-      const res = await fetch(`api/tasks`);
-      const data = await res.json();
-      /*  console.log(data); */
-      return data;
+    AddTask(task) {
+      axios
+        .post("http://localhost:3000/index.php" + "?action=create",task
+         )
+        .then((response) => {
+         
+           console.log(response);
+        });
+      console.log(task);
     },
-    async fetchTask(id) {
-      const res = await fetch(`api/tasks/${id}`);
-      const data = await res.json();
-      /* console.log(data); */
-      return data;
+    deletetask(id) {
+      if (confirm("Are you sure you want to delete this task ")) {
+      }
+    },
+    toggleRiminder(id) {
+      alert(id);
     },
   },
-  async created() {
-    this.tasks = await this.fetchTasks();
+
+  created() {
+    this.tasks = this.fetchAllData();
   },
 };
 </script>

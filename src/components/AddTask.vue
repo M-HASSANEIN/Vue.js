@@ -39,10 +39,11 @@ export default {
       }
      else{
         const newTask = {
-        id: Math.floor(Math.random() * 10000),
+     /*    id: Math.floor(Math.random() * 10000), */
         text:this.text,
         day:this.day,
-        reminder:this.reminder
+        reminder:this.reminder,
+        
       }
       this.$emit('add-task',newTask)
 
@@ -50,7 +51,7 @@ export default {
       this.day=""
       this.reminder=false
       }
-      
+     
      
     },
   },

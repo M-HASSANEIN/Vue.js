@@ -9,26 +9,30 @@ class App extends ModelManager
         return $this->queryFetchAll($req);
 
     }
-    //add album to the data base
+    //add task to the data base
     public function AddNewTask($text, $day, $reminder)
     {
-        $req =
-            " INSERT INTO tasks(`text`,`day`,`reminder`) VALUES (?,?,?)";
+        $req = " INSERT INTO tasks(`text`,`day`,`reminder`) VALUES (?,?,?)";
         $this->query($req, [$text, $day, $reminder]);
     }
-    //delete album from data base
-    public function DeleteAlbumfromDbase($id)
+    //delete task from data base
+    public function DeleteTask($id)
     {
-        $req =
-            "DELETE FROM albums WHERE albums.id_album=?";
+        $req = "DELETE FROM tasks WHERE tasks.id=?";
         $this->query($req, [$id]);
 
     }
     //up date full album from to data base
-    public function UpDateAlbumDbase($name, $image, $date, $id)
+    public function UpDateTask($reminder, $id)
     {
-        $req =
-            "UPDATE albums SET `name`=? ,`image`=?, `date`=? WHERE id_album=?";
-        return $this->query($req, [$name, $image, $date, $id]);
+        $req = "UPDATE tasks SET `reminder`=?  WHERE id=?";
+        return $this->query($req, [$reminder, $id]);
+    }
+    //select  task  from data base
+    public function FetchTask($id)
+    {
+        $req = "SELECT* FROM tasks WHERE tasks.id=?";
+        return $this->queryFetch($req, [$id]);
+
     }
 }
